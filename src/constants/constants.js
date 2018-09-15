@@ -1,0 +1,1 @@
+export const FoodDataEndpoint = 'https://raw.githubusercontent.com/annikahagelin/big-fridge/master/data/data-<<endpointIndex>>.json';
