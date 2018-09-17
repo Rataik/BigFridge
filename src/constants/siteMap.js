@@ -1,23 +1,35 @@
+import {EndpointPlaceholder} from "./constants";
+
 export const Pages = [{
   index: 'quantity',
   name: 'Quantity',
   sections: [
     {
-      index: 'byDatePurchasedBucketedByFood',
-      name: 'By Date Purchased Bucketed By Food',
-      endpoint: 'https://jsonplaceholder.typicode.com/users',
+      index: 'byMonthPurchasedBucketedByFood',
+      name: 'By Month Purchased Bucketed By Food',
+      fetch: {
+        name: 'fetchByMonthPurchasedBucketedByFoodData',
+        url: {
+          base: `https://raw.githubusercontent.com/Rataik/BigFridge/master/data/${EndpointPlaceholder}.json`,
+          endpoints: ['byMonthPurchasedBucketedByFoodName'],
+        }
+      },
       display: 'chart',
-      fetchName: 'fetchFoodData',
-      reducerName: 'quantity_byDatePurchasedBucketedByFoodName',
+      reducerName: 'quantityByMonthPurchasedBucketedByFood',
     },
-    {
-      index: 'purchasedAfterExpirationBucketedByFood',
-      name: 'Purchased After Expiration Bucketed By Food',
-      endpoint: 'https://jsonplaceholder.typicode.com/photos',
-      display: 'chart',
-      fetchName: 'fetchFoodData',
-      reducerName: 'quantity_byExpirationDate',
-    },
+    // {
+    //   index: 'byPurchasedAfterExpirationBucketedByFood',
+    //   name: 'By Purchased After Expiration Bucketed By Food',
+    //   fetch: {
+    //     name: 'fetchByPurchasedAfterExpirationBucketedByFoodData',
+    //     url: {
+    //       base: `https://raw.githubusercontent.com/Rataik/BigFridge/master/data/${EndpointPlaceholder}.json`,
+    //       endpoints: ['purchasedAfterExpirationBucketedByFood'],
+    //     }
+    //   },
+    //   display: 'chart',
+    //   reducerName: 'quantityByPurchasedAfterExpirationBucketedByFood',
+    // },
   ],
 },
 {
@@ -27,10 +39,15 @@ export const Pages = [{
     {
       index: 'associatedProperties',
       name: '',
-      endpoint: 'https://jsonplaceholder.typicode.com/comments',
+      fetch: {
+        name: 'fetchAssociatedPropertiesData',
+        url: {
+          base: `https://raw.githubusercontent.com/Rataik/BigFridge/master/data/associatedProperties-${EndpointPlaceholder}.json`,
+          endpoints: ['0', '1'],
+        }
+      },
       display: 'grid',
-      fetchName: 'fetchFoodData',
-      reducerName: 'list_associatedProperties'
+      reducerName: 'listAssociatedProperties'
     }
   ],
 }];

@@ -1,9 +1,13 @@
-// Generic action types
-export const HasErrored = 'HasErrored';
-export const IsLoading = 'IsLoading';
+export const AssociatedPropertiesFetchIsLoading = 'AssociatedPropertiesFetchIsLoading';
+export const AssociatedPropertiesFetchHasErrored = 'AssociatedPropertiesFetchHasErrored';
+export const AssociatedPropertiesFetchSuccess = 'AssociatedPropertiesFetchSuccess';
 
-// Define new action types as you define new actions
-// e.g. Fetch[FooBar]Success
-export const FetchFoodSuccess = 'FetchFoodSuccess';
+export const ByPurchasedAfterExpirationBucketedByFoodFetchIsLoading = 'ByPurchasedAfterExpirationBucketedByFoodFetchIsLoading';
+export const ByPurchasedAfterExpirationBucketedByFoodFetchHasErrored = 'ByPurchasedAfterExpirationBucketedByFoodFetchHasErrored';
+export const ByPurchasedAfterExpirationBucketedByFoodFetchSuccess = 'ByPurchasedAfterExpirationBucketedByFoodFetchSuccess';
+
+export const ByMonthPurchasedBucketedByFoodFetchIsLoading = 'ByMonthPurchasedBucketedByFoodFetchIsLoading';
+export const ByMonthPurchasedBucketedByFoodFetchHasErrored = 'ByMonthPurchasedBucketedByFoodFetchHasErrored';
+export const ByMonthPurchasedBucketedByFoodFetchSuccess = 'ByMonthPurchasedBucketedByFoodFetchSuccess';
 
 

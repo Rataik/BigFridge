@@ -1,16 +1,6 @@
 import { combineReducers } from 'redux';
-import {foodItems, hasErrored, isLoading} from './food';
-import * as siteMap from '../constants/siteMap';
+import {bigFridge} from './bigFridge';
 
-// const reducers: any = {};
-// siteMap.Pages.forEach((page: any) => {
-//   page.sections.forEach((section: any) => {
-//     reducers[section.reducerName] = food(section.reducerName);
-//   });
-// });
-
-// const rootReducer = combineReducers({...reducers, hasErrored, isLoading});
-const rootReducer = combineReducers({foodItems, hasErrored, isLoading});
-
+const rootReducer = combineReducers({bigFridge});
 
 export default rootReducer;
