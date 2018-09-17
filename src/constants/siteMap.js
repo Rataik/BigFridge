@@ -17,19 +17,19 @@ export const Pages = [{
       display: 'chart',
       reducerName: 'quantityByMonthPurchasedBucketedByFood',
     },
-    // {
-    //   index: 'byPurchasedAfterExpirationBucketedByFood',
-    //   name: 'By Purchased After Expiration Bucketed By Food',
-    //   fetch: {
-    //     name: 'fetchByPurchasedAfterExpirationBucketedByFoodData',
-    //     url: {
-    //       base: `https://raw.githubusercontent.com/Rataik/BigFridge/master/data/${EndpointPlaceholder}.json`,
-    //       endpoints: ['purchasedAfterExpirationBucketedByFood'],
-    //     }
-    //   },
-    //   display: 'chart',
-    //   reducerName: 'quantityByPurchasedAfterExpirationBucketedByFood',
-    // },
+    {
+      index: 'byPurchasedAfterExpirationBucketedByFood',
+      name: 'By Purchased After Expiration Bucketed By Food',
+      fetch: {
+        name: 'fetchByPurchasedAfterExpirationBucketedByFoodData',
+        url: {
+          base: `https://raw.githubusercontent.com/Rataik/BigFridge/master/data/${EndpointPlaceholder}.json`,
+          endpoints: ['purchasedAfterExpirationBucketedByFood'],
+        }
+      },
+      display: 'chart',
+      reducerName: 'quantityByPurchasedAfterExpirationBucketedByFood',
+    },
   ],
 },
 {

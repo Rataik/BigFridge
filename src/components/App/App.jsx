@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import * as siteMap from '../../constants/siteMap';
 import * as querystring from 'querystring';
 import {EndpointPlaceholder, HomePage} from "../../constants/constants";
+import styled from 'styled-components';
 
 function loadData(props: any, state: any) {
   const url = querystring.parse(props.location.search.substring(1));
@@ -25,6 +26,10 @@ function loadData(props: any, state: any) {
     });
   }
 }
+
+const BigFridge = styled.div`    
+  height: 100vh;    
+`;
 
 class App extends Component {
   constructor() {
@@ -53,34 +58,13 @@ class App extends Component {
   }
 
   render() {
-    if (this.props.hasErrored) {
-      return <h1>Sorry! There was an error loading the items</h1>;
-    }
+    <BigFridge id="bigFridge">
 
-    if (this.props.isLoading) {
-      return <h1>Loading…</h1>;
-    }
-
-    return (
-      <ul>
-        {this.props.foodItems.map((item, index) => (
-          <li key={index}>
-            {item.name}
-          </li>
-        ))}
-      </ul>
-    );
+    </BigFridge>
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    foodItems: [],
-    hasErrored: false,
-    isLoading: false
-  };
-};
-
+const mapStateToProps = null
 const mapDispatchToProps = fetchActions;
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
