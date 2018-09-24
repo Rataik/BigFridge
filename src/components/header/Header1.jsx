@@ -12,7 +12,7 @@ const Container = styled.div`
   height: ${props => props.height}px;
   overflow: hidden;    
   padding: 0 25px;
-`
+`;
 
 const Content = styled.div`
   flex: 1 1 auto;
@@ -33,7 +33,7 @@ const SubTitle = styled.div`
   margin-top: -8px;    
 `;
 
-const Header = ({ height, subTitle, title }) => {
+const Header1 = ({ height, subTitle, title }) => {
   return (
     <Container id={`bf_${title}_${subTitle}_header`} height={height}>
       <Content>
@@ -44,4 +44,4 @@ const Header = ({ height, subTitle, title }) => {
   );
 };
 
-export default Header;
+export default Header1;

@@ -16,7 +16,7 @@ function getPageAndSectionFromUrl(props, state) {
   const pageIndexFromUrl = url.page || state.pages.find(page => page.isHome).index;
   const pageFromUrl = state.pages.find(page => page.index === pageIndexFromUrl) || {};
 
-  const sectionIndexFromUrl = url.section
+  const sectionIndexFromUrl = url.section;
   const sectionsFromUrl = pageFromUrl.sections || [];
   const sectionFromUrl = sectionsFromUrl.find(section => section.index === sectionIndexFromUrl);
 
@@ -42,7 +42,7 @@ function loadData(props, state) {
 const BigFridge = styled.div` 
 `;
 
-class App extends PureComponent {
+class App1 extends PureComponent {
   constructor() {
     super();
 
@@ -79,4 +79,4 @@ class App extends PureComponent {
   }
 }
 
-export default withRouter(connect(null, fetchActions)(App));
+export default withRouter(connect(null, fetchActions)(App1));
