@@ -4,7 +4,7 @@ import Breadcrumb from '../breadcrumb/Breadcrumb';
 import Home from '../page/Home';
 import Page from '../page/Page';
 import {AppName} from "../../constants/constants";
-import Header1 from "../header/Header1";
+import Header from "../header/Header";
 
 const Container = styled.div`   
   flex: 1 1 auto;      
@@ -21,7 +21,7 @@ const Panorama = ({ height, page, section }) => {
     <Container id="bf_panorama" height={height}>
       {page.isHome && <Home height={pageHeight} page={page} />}
       {!page.isHome && <Breadcrumb height={breadcrumbHeight} page={page} section={section} />}
-      {!page.isHome && <Header1 height={headerHeight} subTitle={AppName} title={page.name} />}
+      {!page.isHome && <Header height={headerHeight} subTitle={AppName} title={page.name} />}
       {!page.isHome && <Page height={pageHeight} page={page} section={section} />}
     </Container>
   );

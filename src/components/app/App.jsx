@@ -42,7 +42,7 @@ function loadData(props, state) {
 const BigFridge = styled.div` 
 `;
 
-class App1 extends PureComponent {
+class App extends PureComponent {
   constructor() {
     super();
 
@@ -79,4 +79,4 @@ class App1 extends PureComponent {
   }
 }
 
-export default withRouter(connect(null, fetchActions)(App1));
+export default withRouter(connect(null, fetchActions)(App));
