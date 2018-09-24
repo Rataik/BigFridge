@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from 'reac
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as querystring from 'querystring';

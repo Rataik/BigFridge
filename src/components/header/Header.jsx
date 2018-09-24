@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Container = styled.div`   
+const Containerstyled.div`   
   background-color: #ffffff;
   border-bottom-style: solid;
   border-color: rgba(204,204,204,.8);
