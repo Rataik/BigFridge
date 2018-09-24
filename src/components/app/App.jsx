@@ -16,7 +16,7 @@ function getPageAndSectionFromUrl(props, state) {
   const pageIndexFromUrl = url.page || state.pages.find(page => page.isHome).index;
   const pageFromUrl = state.pages.find(page => page.index === pageIndexFromUrl) || {};
 
-  const sectionIndexFromUrl = url.section;
+  const sectionIndexFromUrl = url.section
   const sectionsFromUrl = pageFromUrl.sections || [];
   const sectionFromUrl = sectionsFromUrl.find(section => section.index === sectionIndexFromUrl);
 

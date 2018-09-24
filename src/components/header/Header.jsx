@@ -12,7 +12,7 @@ const Container = styled.div`
   height: ${props => props.height}px;
   overflow: hidden;    
   padding: 0 25px;
-`;
+`
 
 const Content = styled.div`
   flex: 1 1 auto;
