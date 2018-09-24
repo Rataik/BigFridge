@@ -1,0 +1,50 @@
+#bf_spreadsheet .ReactTable {
+    border: none;
+}
+
+#bf_spreadsheet  .ReactTable .rt-thead.-header {
+    box-shadow: none;
+    border-bottom: solid 1px rgb(204, 204, 204);
+    text-transform: uppercase;
+}
+
+#bf_spreadsheet  .ReactTable .rt-thead.-filters {
+    border: none;
+}
+
+#bf_spreadsheet  .ReactTable .rt-thead.-filters input {
+    background-color: #ffffff;
+    border-radius: unset;
+    border: 1px solid rgba(127, 127, 127, .7);
+    box-sizing: border-box;
+    color: #000;
+    font-size: 12px;
+    height: 23px;
+    outline: 0;
+    padding: 2px 8px 2px;
+    width: 100%;
+}
+
+#bf_spreadsheet  .ReactTable .rt-thead.-filters input ::placeholder {
+    font-style: italic;
+    opacity:0.8;
+}
+
+#bf_spreadsheet .ReactTable .rt-thead.-header .rt-resizable-header-content {
+    color: #000000;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: left;
+}
+
+#bf_spreadsheet .ReactTable .rt-tbody .rt-tr-group {
+    border: none;
+}
+
+#bf_spreadsheet .pageTableRow {
+    border-bottom: solid 1px rgb(204, 204, 204)
+}
+
+#bf_spreadsheet .pageTableRow :hover {
+    background-color: rgba(85,179,255,.2);
+}
