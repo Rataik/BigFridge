@@ -94,38 +94,49 @@ const CellText = styled.div`
   margin-left: 10px;  
 `;
 
-const renderCell = ({ row, column }) => (
+const renderCell = row => (
   <Cell>
     <CellIconHolder>
       <SectionIcon />
     </CellIconHolder>
-    <CellText>{row[column.id]}</CellText>
+    <CellText>{row.value}</CellText>
   </Cell>
 );
 
-const renderRow = (state, rowInfo, column ) => {
-  return rowInfo && rowInfo.row.name ? {className: 'pageTableRow'} : {};
-};
+const renderRow = (state, rowInfo) => (rowInfo && rowInfo.row && rowInfo.row.name ? { className: 'pageTableRow' } : {});
 
-class Page extends Component  {
+class Page extends Component {
   constructor(props) {
     super(props);
 
-    this.onTableFilteredChange  = this.onTableFilteredChange.bind(this);
+    this.onTableFilteredChange = this.onTableFilteredChange.bind(this);
     this.reactTable = React.createRef();
 
+    const { page } = this.props;
     this.state = {
-      items: this.props.page.sections.length,
+      items: page.sections.length,
       filtered: [],
+    };
+  }
+
+  componentDidUpdate(prevProps) {
+    const { page } = this.props;
+
+    if (page.index !== prevProps.page.index) {
+      // since this is conditional check it is okay
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({
+        items: page.sections.length,
+        filtered: [],
+      });
     }
   }
 
   onTableFilteredChange(filtered) {
-    this.setState({ filtered: filtered });
+    this.setState({ filtered });
 
     const { current } = this.reactTable;
-    if (current)
-    {
+    if (current) {
       const allData = current.getResolvedState().sortedData;
       const { items } = this.state;
       if (items !== allData.length) {
@@ -134,20 +145,11 @@ class Page extends Component  {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if(this.props.page.index !== prevProps.page.index) {
-      this.setState({
-        items: this.props.page.sections.length,
-        filtered: [],
-      });
-    }
-  }
-
-  render () {
+  render() {
     const { items, filtered } = this.state;
     const { height, page, section } = this.props;
     const data = page.sections;
-    const columns = page.table.columns.map(pageTableColumn => ({...pageTableColumn, Cell: ((row, column) => renderCell(row, column)) }));
+    const columns = page.table.columns.map(pageTableColumn => ({ ...pageTableColumn, Cell: (row => renderCell(row)) }));
 
     return (
       <Container height={height} id={`bf_${page.index}Page`} isStacked={section}>
@@ -161,7 +163,7 @@ class Page extends Component  {
           filtered={filtered}
           ref={this.reactTable}
           minRows={10}
-          onFilteredChange={(filtered) => this.onTableFilteredChange(filtered)}
+          onFilteredChange={filter => this.onTableFilteredChange(filter)}
           showPagination={false}
           getTrProps={(state, rowInfo, column) => renderRow(state, rowInfo, column)}
         />
