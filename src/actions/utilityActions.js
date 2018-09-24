@@ -1,31 +1,31 @@
-function hasErrored(type, hasErrored) {
+function fetchErrored(type, hasErrored) {
   return {
     type,
-    hasErrored
+    hasErrored,
   };
 }
 
-function isLoading(type, isLoading) {
+function fetchLoading(type, isLoading) {
   return {
     type,
-    isLoading
+    isLoading,
   };
 }
 
 function fetchSuccess(type, data) {
   return {
     type,
-    data
+    data,
   };
 }
 
-export function fetchData(urls, parseDataCallback, args, fetchSuccessType, fetchLoadingType, fetchErrorType) {
+function fetchData(urls, parseDataCallback, args, fetchSuccessType, fetchLoadingType, fetchErrorType) {
   return async (dispatch) => {
-    dispatch(isLoading(fetchLoadingType, true));
+    dispatch(fetchLoading(fetchLoadingType, true));
 
     await Promise.all(
-      urls.map((url) => {
-        return fetch(url)
+      urls.map(url => (
+        fetch(url)
           .then((response) => {
             if (!response.ok) {
               throw new Error(response.statusText);
@@ -33,20 +33,20 @@ export function fetchData(urls, parseDataCallback, args, fetchSuccessType, fetch
 
             return response;
           })
-          .then((response) => {
-            return response.json();
-          })
+          .then(response => response.json())
           .then((json) => {
             const data = parseDataCallback(...args, json);
-            dispatch(isLoading(fetchLoadingType, false));
+            dispatch(fetchLoading(fetchLoadingType, false));
             dispatch(fetchSuccess(fetchSuccessType, data));
           })
           .catch((error) => {
             console.log(error);
-            dispatch(isLoading(fetchLoadingType, false));
-            dispatch(hasErrored(fetchErrorType, true));
-          });
-      })
-      );
+            dispatch(fetchLoading(fetchLoadingType, false));
+            dispatch(fetchErrored(fetchErrorType, true));
+          })
+      )),
+    );
   };
 }
+
+export default fetchData;

@@ -7,30 +7,30 @@ import {
   ByPurchasedAfterExpirationBucketedByFoodFetchHasErrored,
   ByMonthPurchasedBucketedByFoodFetchSuccess,
   ByMonthPurchasedBucketedByFoodFetchIsLoading,
-  ByMonthPurchasedBucketedByFoodFetchHasErrored
-} from "../constants/actionTypes";
-import * as siteMap from '../constants/siteMap';
+  ByMonthPurchasedBucketedByFoodFetchHasErrored,
+} from '../constants/actionTypes';
+import Pages from '../constants/siteMap';
 
-const initialState: any = {};
-siteMap.Pages.forEach((page: any) => {
-  page.sections.forEach((section: any) => {
+const initialState = {};
+Pages.filter(page => !page.isHome).forEach(page => (
+  page.sections.forEach((section) => {
     initialState[section.reducerName] = {
       hasErrored: false,
       isLoading: false,
       foodItems: [],
     };
-  });
-});
+  })
+));
 
-export function bigFridge(state = initialState, action) {
+function bigFridge(state = initialState, action) {
   switch (action.type) {
     case ByMonthPurchasedBucketedByFoodFetchHasErrored:
       return {
         ...state,
         quantityByMonthPurchasedBucketedByFood: {
           ...state.quantityByMonthPurchasedBucketedByFood,
-          hasErrored: action.hasErrored
-        }
+          hasErrored: action.hasErrored,
+        },
       };
 
     case ByPurchasedAfterExpirationBucketedByFoodFetchHasErrored:
@@ -38,8 +38,8 @@ export function bigFridge(state = initialState, action) {
         ...state,
         quantityByPurchasedAfterExpirationBucketedByFood: {
           ...state.quantityByPurchasedAfterExpirationBucketedByFood,
-          hasErrored: action.hasErrored
-        }
+          hasErrored: action.hasErrored,
+        },
       };
 
     case AssociatedPropertiesFetchHasErrored:
@@ -47,8 +47,8 @@ export function bigFridge(state = initialState, action) {
         ...state,
         listAssociatedProperties: {
           ...state.listAssociatedProperties,
-          hasErrored: action.hasErrored
-        }
+          hasErrored: action.hasErrored,
+        },
       };
 
     case ByMonthPurchasedBucketedByFoodFetchIsLoading:
@@ -56,8 +56,8 @@ export function bigFridge(state = initialState, action) {
         ...state,
         quantityByMonthPurchasedBucketedByFood: {
           ...state.quantityByMonthPurchasedBucketedByFood,
-          isLoading: action.isLoading
-        }
+          isLoading: action.isLoading,
+        },
       };
 
     case ByPurchasedAfterExpirationBucketedByFoodFetchIsLoading:
@@ -65,8 +65,8 @@ export function bigFridge(state = initialState, action) {
         ...state,
         quantityByPurchasedAfterExpirationBucketedByFood: {
           ...state.quantityByPurchasedAfterExpirationBucketedByFood,
-          isLoading: action.isLoading
-        }
+          isLoading: action.isLoading,
+        },
       };
 
     case AssociatedPropertiesFetchIsLoading:
@@ -74,8 +74,8 @@ export function bigFridge(state = initialState, action) {
         ...state,
         listAssociatedProperties: {
           ...state.listAssociatedProperties,
-          isLoading: action.isLoading
-        }
+          isLoading: action.isLoading,
+        },
       };
 
     case ByMonthPurchasedBucketedByFoodFetchSuccess:
@@ -83,8 +83,8 @@ export function bigFridge(state = initialState, action) {
         ...state,
         quantityByMonthPurchasedBucketedByFood: {
           ...state.quantityByMonthPurchasedBucketedByFood,
-          foodItems: state.quantityByMonthPurchasedBucketedByFood.foodItems.concat(action.data.items)
-        }
+          foodItems: state.quantityByMonthPurchasedBucketedByFood.foodItems.concat(action.data.items),
+        },
       };
 
     case ByPurchasedAfterExpirationBucketedByFoodFetchSuccess:
@@ -92,8 +92,8 @@ export function bigFridge(state = initialState, action) {
         ...state,
         quantityByPurchasedAfterExpirationBucketedByFood: {
           ...state.quantityByPurchasedAfterExpirationBucketedByFood,
-          foodItems: state.quantityByPurchasedAfterExpirationBucketedByFood.foodItems.concat(action.data.items)
-        }
+          foodItems: state.quantityByPurchasedAfterExpirationBucketedByFood.foodItems.concat(action.data.items),
+        },
       };
 
     case AssociatedPropertiesFetchSuccess:
@@ -101,11 +101,13 @@ export function bigFridge(state = initialState, action) {
         ...state,
         listAssociatedProperties: {
           ...state.listAssociatedProperties,
-          foodItems: state.listAssociatedProperties.foodItems.concat(action.data.items)
-        }
+          foodItems: state.listAssociatedProperties.foodItems.concat(action.data.items),
+        },
       };
 
     default:
       return state;
   }
 }
+
+export default bigFridge;

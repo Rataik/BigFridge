@@ -9,5 +9,3 @@ export const ByPurchasedAfterExpirationBucketedByFoodFetchSuccess = 'ByPurchased
 export const ByMonthPurchasedBucketedByFoodFetchIsLoading = 'ByMonthPurchasedBucketedByFoodFetchIsLoading';
 export const ByMonthPurchasedBucketedByFoodFetchHasErrored = 'ByMonthPurchasedBucketedByFoodFetchHasErrored';
 export const ByMonthPurchasedBucketedByFoodFetchSuccess = 'ByMonthPurchasedBucketedByFoodFetchSuccess';
-
-

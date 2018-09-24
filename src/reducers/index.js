@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import {bigFridge} from './bigFridge';
+import bigFridge from './bigFridge';
 
-const rootReducer = combineReducers({bigFridge});
+const rootReducer = combineReducers({ bigFridge });
 
 export default rootReducer;

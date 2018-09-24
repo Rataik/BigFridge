@@ -1,2 +1,2 @@
-export const HomePage = 'quantity';
 export const EndpointPlaceholder = '<<endpoint>>';
+export const AppName = 'BigFridge';

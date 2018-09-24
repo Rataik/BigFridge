@@ -3,22 +3,32 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "match-sorter": "^2.3.0",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.5",
+    "react-table": "^6.8.6",
+    "recharts": "^1.2.0",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
     "styled-components": "^3.4.6"
   },
   "devDependencies": {
-    "cross-env": "^5.2.0"
+    "cross-env": "^5.2.0",
+    "eslint": "^5.6.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "source-map-explorer": "^1.6.0"
   },
   "scripts": {
     "startdev": "cross-env REACT_APP_DEV=1 react-scripts start",
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "lintnofix": "eslint . --ext .js,.jsx",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

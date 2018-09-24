@@ -1,0 +1,7 @@
+.pageTableRow {
+    border-bottom: solid 1px rgb(204, 204, 204)
+}
+
+.pageTableRow :hover {
+    background-color: rgba(85,179,255,.2);
+}
