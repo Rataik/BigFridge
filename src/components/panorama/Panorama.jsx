@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import Breadcrumb from '../breadcrumb/Breadcrumb';
 import Home from '../page/Home';
 import Page from '../page/Page';
-import {AppName} from "../../constants/constants";
-import Header from "../header/Header";
+import { AppName } from '../../constants/constants';
+import Header from '../header/Header';
 
 const Container = styled.div`   
   flex: 1 1 auto;      

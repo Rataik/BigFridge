@@ -1,6 +1,6 @@
 import matchSorter from 'match-sorter';
+import React from 'react';
 import { EndpointPlaceholder } from './constants';
-import React from "react";
 
 const renderTableFilter = ({ filter, onChange }) => (
   <input
@@ -72,7 +72,7 @@ const Pages = [{
       id: 'name',
       Header: 'name',
       accessor: row => row.name,
-      filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['name']}),
+      filterMethod: (filter, rows) => matchSorter(rows, filter.value, { keys: ['name'] }),
       filterAll: true,
       Filter: renderTableFilter,
     }],
@@ -124,7 +124,7 @@ const Pages = [{
       id: 'name',
       Header: 'name',
       accessor: row => row.name,
-      filterMethod: (filter, rows) => matchSorter(rows, filter.value, {keys: ['name']}),
+      filterMethod: (filter, rows) => matchSorter(rows, filter.value, { keys: ['name'] }),
       filterAll: true,
       Filter: renderTableFilter,
     }],

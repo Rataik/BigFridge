@@ -9,7 +9,7 @@ import {
   ByMonthPurchasedBucketedByFoodFetchIsLoading,
   ByMonthPurchasedBucketedByFoodFetchHasErrored,
 } from '../constants/actionTypes';
-import Pages from '../constants/siteMap';
+import Pages from '../constants/SiteMap';
 
 const initialState = {};
 Pages.filter(page => !page.isHome).forEach(page => (

@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import * as querystring from 'querystring';
 import styled from 'styled-components';
 import * as fetchActions from '../../actions';
-import Pages from '../../constants/siteMap';
+import Pages from '../../constants/SiteMap';
 import { EndpointPlaceholder } from '../../constants/constants';
 import Banner from '../banner/Banner';
 import Dashboard from '../dashboard/Dashboard';

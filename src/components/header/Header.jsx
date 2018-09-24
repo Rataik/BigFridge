@@ -33,15 +33,13 @@ const SubTitle = styled.div`
   margin-top: -8px;    
 `;
 
-const Header = ({ height, subTitle, title }) => {
-  return (
-    <Container id={`bf_${title}_${subTitle}_header`} height={height}>
-      <Content>
-        <Title>{title}</Title>
-        <SubTitle>{subTitle}</SubTitle>
-      </Content>
-    </Container>
-  );
-};
+const Header = ({ height, subTitle, title }) => (
+  <Container id={`bf_${title}_${subTitle}_header`} height={height}>
+    <Content>
+      <Title>{title}</Title>
+      <SubTitle>{subTitle}</SubTitle>
+    </Content>
+  </Container>
+);
 
 export default Header;

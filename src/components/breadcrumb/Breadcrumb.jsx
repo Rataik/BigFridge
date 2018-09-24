@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { HomepageName, HomepageIndex } from '../../constants/siteMap';
+import { HomepageName, HomepageIndex } from '../../constants/SiteMap';
 
 const Container = styled.div`    
   background-color: #ffffff;  
@@ -32,29 +32,28 @@ const BreadcrumbText = styled.div`
 const getBreadcrumb = (page, section) => {
   const crumbs = [{
     name: HomepageName,
-    link: `?page=${HomepageIndex}`
+    link: `?page=${HomepageIndex}`,
   }, {
     name: page && page.name,
-    link: page && `?page=${page.index}`
+    link: page && `?page=${page.index}`,
   }, {
     name: section && section.name,
-    link: section && `?page=${page.index}&section=${section.index}`
+    link: section && `?page=${page.index}&section=${section.index}`,
   }];
 
- return (
+  return (
     crumbs
       .filter(crumb => crumb.name)
       .map((crumb, index, arr) => {
         const isLast = index === arr.length - 1;
         if (!isLast) {
           return (
-            <BreadcrumbLink key={index} to={crumb.link}>
+            <BreadcrumbLink key={crumb.name} to={crumb.link}>
               <BreadcrumbText>{crumb.name}</BreadcrumbText>
             </BreadcrumbLink>
           );
-        } else {
-          return <BreadcrumbText isLast key={index}>{crumb.name}</BreadcrumbText>;
         }
+        return <BreadcrumbText isLast key={crumb.name}>{crumb.name}</BreadcrumbText>;
       })
       .reduce((r, a) => r.concat(a, (<BreadcrumbText isLast key={`sep_${r.length}`}>{'>'}</BreadcrumbText>)), [])
       .slice(0, -1)
