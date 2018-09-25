@@ -76,6 +76,11 @@ const Pages = [{
       filterAll: true,
       Filter: renderTableFilter,
     }],
+    defaultFilterMethod: (filter, row) => String(row[filter.id]) === filter.value,
+    defaultPageSize: 10,
+    filterable: true,
+    minRows: 10,
+    showPagination: false,
   },
   sections: [
     {
@@ -128,6 +133,11 @@ const Pages = [{
       filterAll: true,
       Filter: renderTableFilter,
     }],
+    defaultFilterMethod: (filter, row) => String(row[filter.id]) === filter.value,
+    defaultPageSize: 10,
+    filterable: true,
+    minRows: 10,
+    showPagination: false,
   },
   sections: [
     {

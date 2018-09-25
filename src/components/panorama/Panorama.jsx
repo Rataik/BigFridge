@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Breadcrumb from '../breadcrumb/Breadcrumb';
 import Home from '../page/Home';
-import Page from '../page/Page';
 import Spreadsheet from '../spreadsheet/Spreadsheet';
 import { AppName } from '../../constants/constants';
 import Header from '../header/Header';
@@ -23,8 +22,7 @@ const Panorama = ({ height, page, section }) => {
       {page.isHome && <Home height={pageHeight} page={page} />}
       {!page.isHome && <Breadcrumb height={breadcrumbHeight} page={page} section={section} />}
       {!page.isHome && <Header height={headerHeight} subTitle={AppName} title={page.name} />}
-      {!page.isHome && <Page height={pageHeight} page={page} section={section} />}
-      {/*{!page.isHome && <Spreadsheet height={pageHeight} page={page} spreadsheetType="grid" />}*/}
+      {!page.isHome && <Spreadsheet height={pageHeight} page={page} section={section} spreadsheetType="grid" />}
     </Container>
   );
 };

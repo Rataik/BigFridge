@@ -11,12 +11,15 @@ const Container = styled.div`
   padding: 25px;       
 `;
 
-const Spreadsheet = ({ height, page, spreadsheetType }) => {
-  const SpreadsheetToUse = spreadsheetType === 'grid' ? Grid : Chart;
+const Spreadsheet = ({
+  height, page, section,
+}) => {
+  let SpreadsheetToUse = Grid;
+  SpreadsheetToUse = section && section.chart ? Chart : Grid;
 
   return (
     <Container id="bf_spreadsheet" height={height}>
-      <SpreadsheetToUse page={page} gridType="static" />
+      <SpreadsheetToUse page={page} section={section} />
     </Container>
   );
 };

@@ -12,12 +12,10 @@ const ItemsContent = styled.div`
   padding-right: 20px;
 `;
 
-const Header = ({ children }) => {
-  return (
-    <ItemsContainer>
-      <ItemsContent>{children}</ItemsContent>
-    </ItemsContainer>
-  );
-};
+const Header = ({ items }) => (
+  <ItemsContainer>
+    <ItemsContent>{`${items} ${items !== 1 ? 'items' : 'item'}`}</ItemsContent>
+  </ItemsContainer>
+);
 
 export default Header;
