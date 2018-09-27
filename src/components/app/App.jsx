@@ -56,16 +56,6 @@ class App extends PureComponent {
     loadData(this.props, this.state);
   }
 
-  componentDidUpdate(prevProps) {
-    const { location } = this.props;
-    const newUrl = querystring.parse(location.search.substring(1));
-    const oldUrl = querystring.parse(prevProps.location.search.substring(1));
-
-    if (newUrl.section !== oldUrl.section || newUrl.page !== oldUrl.page) {
-      loadData(this.props, this.state);
-    }
-  }
-
   render() {
     const { height, pages } = this.state;
     const { pageFromUrl, sectionFromUrl } = getPageAndSectionFromUrl(this.props, this.state);
