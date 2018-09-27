@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import Grid from './grid/Grid';
 import Chart from './chart/Chart';
 
+const padding = 50;
 const Container = styled.div`
   background-color: #ffffff;   
   box-sizing: border-box;
-  height: ${props => props.height}px;
-  overflow: hidden;      
-  padding: 25px;       
+  height: ${props => props.height}px;   
+  padding: ${padding / 2}px;      
+  overflow: hidden;
 `;
 
 const Spreadsheet = ({
@@ -19,7 +20,7 @@ const Spreadsheet = ({
 
   return (
     <Container id="bf_spreadsheet" height={height}>
-      <SpreadsheetToUse page={page} section={section} />
+      <SpreadsheetToUse height={height - padding} page={page} section={section} />
     </Container>
   );
 };

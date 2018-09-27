@@ -22,7 +22,7 @@ const Panorama = ({ height, page, section }) => {
       {page.isHome && <Home height={pageHeight} page={page} />}
       {!page.isHome && <Breadcrumb height={breadcrumbHeight} page={page} section={section} />}
       {!page.isHome && <Header height={headerHeight} subTitle={AppName} title={page.name} />}
-      {!page.isHome && <Spreadsheet height={pageHeight} page={page} section={section} spreadsheetType="grid" />}
+      {!page.isHome && <Spreadsheet height={pageHeight} page={page} section={section} />}
     </Container>
   );
 };

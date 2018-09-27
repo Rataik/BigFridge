@@ -1,0 +1,78 @@
+.DateRangeFilter {
+    display: flex;
+    font-family: az_ea_font, "Segoe UI", wf_segoe-ui_normal, "Segoe WP", Tahoma, Arial,sans-serif;
+    font-size: 12px;
+    justify-content: space-between;
+    line-height: 22px;
+    position: relative;
+    text-transform: uppercase;
+}
+
+.DayPickerInput {
+    width: 49.5%;
+}
+
+.DayPickerInput-Overlay {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-bottom-color: #bbb;
+    color: #333;
+}
+
+.DayPicker-wrapper {
+    margin: 8px;
+    padding: 0;
+}
+
+.DayPicker-Months {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+.DayPicker-Month {
+    margin: 0;
+}
+
+.DayPicker-NavButton {
+    top: 0;
+    right:0;
+    left: auto;
+    margin-top: 0;
+}
+
+.DayPicker-Weekdays {
+    margin-top: 0;
+}
+
+.DayPicker-WeekdaysRow {
+    border-bottom: 1px solid #383838;
+}
+
+.DayPicker-Weekday {
+    color:#999999;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 25px;
+}
+
+.DayPicker-Day {
+    border-radius: unset;
+    color: #666666;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 15px;
+}
+
+.DayPicker-Day--today {
+    background-color: #006fa4;
+    border-color: #006fa4;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 15px;
+}
+
+.DayPicker-Footer {
+    padding-top: 100px;
+}

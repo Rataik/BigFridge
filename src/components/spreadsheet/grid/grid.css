@@ -1,0 +1,153 @@
+#bf_spreadsheet .ReactTable {
+    border: none;
+}
+
+#bf_spreadsheet .ReactTable .rt-table {
+    overflow-x: hidden;
+}
+
+#bf_spreadsheet .ReactTable .rt-thead {
+    padding-right: 17px;
+}
+
+#bf_spreadsheet .ReactTable .rt-thead.-header {
+    box-shadow: none;
+    border-bottom: solid 1px rgb(204, 204, 204);
+    text-transform: uppercase;
+}
+
+#bf_spreadsheet  .ReactTable .rt-thead.-filters {
+    border: none;
+}
+
+#bf_spreadsheet  .ReactTable .rt-thead.-filters input {
+    background-color: #ffffff;
+    border-radius: unset;
+    border: 1px solid rgba(127, 127, 127, .7);
+    box-sizing: border-box;
+    color: #000;
+    font-size: 12px;
+    height: 23px;
+    outline: 0;
+    padding: 2px 8px 2px;
+    width: 100%;
+}
+
+#bf_spreadsheet  .ReactTable .rt-thead.-filters input::placeholder {
+    font-style: italic;
+    opacity:0.8;
+}
+
+#bf_spreadsheet .ReactTable .rt-thead.-header .rt-resizable-header-content {
+    color: #000000;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: left;
+}
+
+#bf_spreadsheet .ReactTable .rt-tbody .rt-tr-group {
+    border: none;
+}
+
+#bf_spreadsheet .rt-resizer {
+    display: none;
+}
+
+#bf_spreadsheet .pageTableRow {
+    border-bottom: solid 1px rgb(204, 204, 204)
+}
+
+#bf_spreadsheet .pageTableRow:hover {
+    background-color: rgba(85,179,255,.2);
+}
+
+#bf_spreadsheet .ReactTable .pagination-bottom {
+    color: #000000;
+    position: absolute;
+    top: -24px; /* todo: note this this needs to be in sync with the header height. */
+    right: 0;
+}
+
+#bf_spreadsheet .ReactTable .-pagination {
+    align-items: unset;
+    box-shadow: none;
+    border: none;
+    display: flex;
+    font-size: 12px;
+    font-weight: 400;
+    justify-content: unset;
+    margin-right: 10px;
+    padding: 0;
+}
+
+#bf_spreadsheet .ReactTable .-pagination .-previous,
+.ReactTable .-pagination .-next {
+    display: inline-block;
+    flex: unset;
+    line-height: 22px;
+    min-width: 80px;
+    text-align: center;
+}
+
+#bf_spreadsheet .ReactTable .-pagination .-previous {
+    margin-right: 10px;
+}
+
+#bf_spreadsheet .ReactTable .-pagination .-next {
+    margin-left: 10px;
+}
+
+#bf_spreadsheet .ReactTable .-pagination .-btn {
+    background-color: rgba(0,0,0,.4);
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    color: rgba(0,0,0,.9);
+    cursor: default;
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    height: 24px;
+    line-height: 22px;
+    margin: 0;
+    outline: 0;
+    padding: 0 20px;
+    position: relative;
+}
+
+#bf_spreadsheet .ReactTable .-pagination .-btn[disabled] {
+    opacity: 0.3;
+}
+
+
+#bf_spreadsheet .ReactTable .-pagination .-pageInfo {
+    margin: 0 10px 0 0;
+}
+
+#bf_spreadsheet .ReactTable .-pagination .-pageJump {
+    height: auto;
+    width: 40px;
+}
+
+#bf_spreadsheet .ReactTable .-pagination .-pageJump input,
+#bf_spreadsheet .ReactTable .-pagination select {
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: unset;
+}
+
+#bf_spreadsheet .ReactTable .-pagination .-pageJump input {
+    padding: 4px 7px;
+}
+
+#bf_spreadsheet .ReactTable .-pagination select {
+    padding: 3px 7px;
+}
+
+
+#bf_spreadsheet .ReactTable .-pagination select {
+
+}
+
+#bf_spreadsheet .ReactTable .-pagination .-pageSizeOptions {
+    margin: 0;
+}

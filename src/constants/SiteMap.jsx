@@ -1,14 +1,16 @@
 import matchSorter from 'match-sorter';
 import React from 'react';
+// import ReactTableFilters from 'react-table-filters';
 import { EndpointPlaceholder } from './constants';
+import { filterDates, renderDateFilter } from '../components/spreadsheet/grid/shared/DateRangeFilter/DateRangeFilter';
+import { renderNumberRangeSliderFilter, filterDataInRange } from '../components/spreadsheet/grid/shared/numberRangeSliderFilter/NumberRangeSliderFilter';
 
-const renderTableFilter = ({ filter, onChange }) => (
+const renderInputFilter = ({ column, filter, onChange }) => (
   <input
     onChange={event => onChange(event.target.value)}
-    placeholder="Filter..."
+    placeholder={`Filter by ${column.Header}...`}
     value={filter ? filter.value : ''}
-  />
-);
+  />);
 
 export const HomepageName = 'Home';
 export const HomepageIndex = 'home';
@@ -74,9 +76,9 @@ const Pages = [{
       accessor: row => row.name,
       filterMethod: (filter, rows) => matchSorter(rows, filter.value, { keys: ['name'] }),
       filterAll: true,
-      Filter: renderTableFilter,
+      Filter: renderInputFilter,
+      isDateTime: false,
     }],
-    defaultFilterMethod: (filter, row) => String(row[filter.id]) === filter.value,
     defaultPageSize: 10,
     filterable: true,
     minRows: 10,
@@ -131,9 +133,9 @@ const Pages = [{
       accessor: row => row.name,
       filterMethod: (filter, rows) => matchSorter(rows, filter.value, { keys: ['name'] }),
       filterAll: true,
-      Filter: renderTableFilter,
+      Filter: renderInputFilter,
+      isDateTime: false,
     }],
-    defaultFilterMethod: (filter, row) => String(row[filter.id]) === filter.value,
     defaultPageSize: 10,
     filterable: true,
     minRows: 10,
@@ -147,16 +149,77 @@ const Pages = [{
         name: 'fetchAssociatedPropertiesData',
         url: {
           base: `https://raw.githubusercontent.com/Rataik/BigFridge/master/data/associatedProperties-${EndpointPlaceholder}.json`,
-          endpoints: ['0', '1'],
+          endpoints: ['0'],
         },
       },
-      display: 'grid',
       reducerName: 'listAssociatedProperties',
       svg: {
         icon: 'SectionIcon',
       },
+      table: {
+        columns: [{
+          id: 'name',
+          Header: 'Name',
+          accessor: row => row.Name,
+          filterMethod: (filter, rows) => matchSorter(rows, filter.value, { keys: ['name'] }),
+          filterAll: true,
+          Filter: renderInputFilter,
+          isDateTime: false,
+        }, {
+          id: 'type',
+          Header: 'Type',
+          accessor: row => row.Type,
+          filterMethod: (filter, rows) => matchSorter(rows, filter.value, { keys: ['type'] }),
+          filterAll: true,
+          Filter: renderInputFilter,
+          isDateTime: false,
+        }, {
+          id: 'store',
+          Header: 'Store',
+          accessor: row => row.Store,
+          filterMethod: (filter, rows) => matchSorter(rows, filter.value, { keys: ['store'] }),
+          filterAll: true,
+          Filter: renderInputFilter,
+          isDateTime: false,
+        }, {
+          id: 'purchaseDate',
+          Header: 'Purchase Date',
+          accessor: row => row.PurchaseDate,
+          filterMethod: filterDates,
+          filterAll: false,
+          Filter: renderDateFilter,
+          isDateTime: true,
+        }, {
+          id: 'expirationDate',
+          Header: 'Expiration Date',
+          accessor: row => row.ExpirationDate,
+          filterMethod: filterDates,
+          filterAll: false,
+          Filter: renderDateFilter,
+          isDateTime: true,
+        }, {
+          id: 'quantity',
+          Header: 'Quantity',
+          accessor: row => row.Quantity,
+          filterMethod: filterDataInRange,
+          filterAll: false,
+          Filter: renderNumberRangeSliderFilter,
+          isDateTime: false,
+        }],
+        defaultFilterMethod: (filter, rows) => {
+          const { id } = filter;
+          return rows.filter(row => row[id].toLowerCase().startsWith(filter.value.toLowerCase()));
+        },
+        defaultPageSize: 50,
+        filterable: true,
+        maxWidth: '100px',
+        minRows: 50,
+        pageSizeOptions: [50, 100, 500],
+        showPagination: true,
+      },
     },
   ],
 }];
+
 
 export default Pages;
