@@ -5,7 +5,6 @@ import ReactTable from 'react-table';
 import styled from 'styled-components';
 import 'react-table/react-table.css';
 import Header from './shared/Header/Header';
-import './grid.css';
 
 const Cell = styled.div`  
   align-items: center;   
