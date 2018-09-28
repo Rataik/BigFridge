@@ -183,7 +183,7 @@ const Pages = [{
           Filter: renderInputFilter,
           isDateTime: false,
         }, {
-          id: 'purchaseDate',
+          id: 'PurchaseDate',
           Header: 'Purchase Date',
           accessor: row => row.PurchaseDate,
           filterMethod: filterDates,
@@ -191,7 +191,7 @@ const Pages = [{
           Filter: renderDateFilter,
           isDateTime: true,
         }, {
-          id: 'expirationDate',
+          id: 'ExpirationDate',
           Header: 'Expiration Date',
           accessor: row => row.ExpirationDate,
           filterMethod: filterDates,
@@ -221,6 +221,5 @@ const Pages = [{
     },
   ],
 }];
-
 
 export default Pages;

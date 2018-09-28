@@ -1,19 +1,16 @@
-const parseDateTime = (dateTimeColumns, items) => {
-  const dateTimeKeys = dateTimeColumns.join('|').toLowerCase().split('|');
-  return items.map((item) => {
-    const newItem = {};
-
-    Object.entries(item).forEach(([key, value]) => {
-      if (dateTimeKeys.includes(key.toLowerCase())) {
-        newItem[key] = new Date(value);
-      } else {
-        newItem[key] = value;
-      }
-    });
-
-    return newItem;
+const getNewDateTimeItem = (dateTimeColumns, item) => {
+  const newItem = {};
+  dateTimeColumns.forEach((column) => {
+    newItem[column] = new Date(item[column]);
   });
+
+  return newItem;
 };
+
+const parseDateTime = (dateTimeColumns, items) => items.map(item => ({
+  ...item,
+  ...getNewDateTimeItem(dateTimeColumns, item),
+}));
 
 // Custom data parser
 // If we had separate data sources based on food types like meat, alcohol, cheese etc.

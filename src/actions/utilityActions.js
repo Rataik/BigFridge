@@ -1,3 +1,5 @@
+import { FetchDelay } from '../constants/constants';
+
 function fetchErrored(type, hasErrored) {
   return {
     type,
@@ -19,56 +21,40 @@ function fetchSuccess(type, data) {
   };
 }
 
+function makeFetchRequest(url, parseDataCallback, args, fetchSuccessType, fetchLoadingType, fetchErrorType, dispatch) {
+  console.log(new Date().getSeconds());
+  fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      return response;
+    })
+    .then(response => response.json())
+    .then((json) => {
+      const data = parseDataCallback(args, json);
+      dispatch(fetchLoading(fetchLoadingType, false));
+      dispatch(fetchSuccess(fetchSuccessType, data));
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch(fetchLoading(fetchLoadingType, false));
+      dispatch(fetchErrored(fetchErrorType, true));
+    });
+}
+
 function fetchData(urls, parseDataCallback, args, fetchSuccessType, fetchLoadingType, fetchErrorType) {
-  return async (dispatch) => {
+  return (dispatch) => {
     dispatch(fetchLoading(fetchLoadingType, true));
 
     // Optimization: looks like if you fire all requests async the isLoading is false, but fetchSuccess hasn't been dispatched yet.
-    // todo: refactor
-    const firstUrl = urls.pop();
-    fetch(firstUrl)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
-
-        return response;
-      })
-      .then(response => response.json())
-      .then((json) => {
-        const data = parseDataCallback(args, json);
-        dispatch(fetchLoading(fetchLoadingType, false));
-        dispatch(fetchSuccess(fetchSuccessType, data));
-      })
-      .catch((error) => {
-        console.log(error);
-        dispatch(fetchLoading(fetchLoadingType, false));
-        dispatch(fetchErrored(fetchErrorType, true));
-      });
-
-    await setTimeout(() => Promise.all(
-      urls.map(url => (
-        fetch(url)
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error(response.statusText);
-            }
-
-            return response;
-          })
-          .then(response => response.json())
-          .then((json) => {
-            const data = parseDataCallback(args, json);
-            dispatch(fetchLoading(fetchLoadingType, false));
-            dispatch(fetchSuccess(fetchSuccessType, data));
-          })
-          .catch((error) => {
-            console.log(error);
-            dispatch(fetchLoading(fetchLoadingType, false));
-            dispatch(fetchErrored(fetchErrorType, true));
-          })
-      )),
-    ), 0);
+    let delay = 0;
+    urls.forEach((url) => {
+      setTimeout(() => makeFetchRequest(url, parseDataCallback, args, fetchSuccessType, fetchLoadingType, fetchErrorType, dispatch),
+        delay + FetchDelay);
+      delay += FetchDelay;
+    });
   };
 }
 
