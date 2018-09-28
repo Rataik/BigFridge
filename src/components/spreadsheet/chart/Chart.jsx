@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import connect from 'react-redux/es/connect/connect';
-import DynamicChart from './DynamicChart';
 
 class Chart extends Component {
   constructor(props) {
@@ -9,7 +8,7 @@ class Chart extends Component {
   }
 
   render() {
-    return;
+    return <div>Chart</div>;
   }
 }
 

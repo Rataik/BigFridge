@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import * as querystring from 'querystring';
 import styled from 'styled-components';
 import * as fetchActions from '../../actions';
-import Pages from '../../constants/SiteMap';
+import Pages from '../../constants/siteMap/SiteMap';
 import { EndpointPlaceholder } from '../../constants/constants';
 import Banner from '../banner/Banner';
 import Dashboard from '../dashboard/Dashboard';
@@ -27,16 +27,23 @@ function getPageAndSectionFromUrl(props, state) {
 }
 
 function loadData(props, state) {
-  const { pageFromUrl, sectionFromUrl } = getPageAndSectionFromUrl(props, state);
+  state.pages.filter(page => !page.isHome).forEach(page => (
+    page.sections.forEach((section) => {
+      const urls = section.fetch.url.endpoints.map(endpoint => section.fetch.url.base.replace(EndpointPlaceholder, endpoint));
 
-  if (pageFromUrl.sections) {
-    pageFromUrl.sections.forEach((section) => {
-      if (((sectionFromUrl && section.index === sectionFromUrl.index) || !sectionFromUrl) && props[section.fetch.name] && section && section.fetch.url) {
-        const urls = section.fetch.url.endpoints.map(endpoint => section.fetch.url.base.replace(EndpointPlaceholder, endpoint));
-        props[section.fetch.name](urls, [section.index, section.name]);
+      let fetchArgs = [];
+      if (section.table) {
+        fetchArgs = section.table.columns.reduce((result, column) => {
+          if (column.isDateTime) {
+            result.push(column.id);
+          }
+          return result;
+        }, []);
       }
-    });
-  }
+
+      props[section.fetch.name](urls, fetchArgs);
+    })
+  ));
 }
 
 const BigFridge = styled.div` 

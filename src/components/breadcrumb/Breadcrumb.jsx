@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { HomepageName, HomepageIndex } from '../../constants/SiteMap';
+import { HomepageName, HomepageIndex } from '../../constants/siteMap/SiteMap';
 
 const Container = styled.div`    
   background-color: #ffffff;  

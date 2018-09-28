@@ -8,7 +8,7 @@ class DynamicChart extends Component {
   }
 
   render() {
-    return;
+    return <div>Dynamic Chart</div>
   }
 }
 

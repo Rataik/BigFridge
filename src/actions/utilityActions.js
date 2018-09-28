@@ -23,7 +23,30 @@ function fetchData(urls, parseDataCallback, args, fetchSuccessType, fetchLoading
   return async (dispatch) => {
     dispatch(fetchLoading(fetchLoadingType, true));
 
-    await Promise.all(
+    // Optimization: looks like if you fire all requests async the isLoading is false, but fetchSuccess hasn't been dispatched yet.
+    // todo: refactor
+    const firstUrl = urls.pop();
+    fetch(firstUrl)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+
+        return response;
+      })
+      .then(response => response.json())
+      .then((json) => {
+        const data = parseDataCallback(args, json);
+        dispatch(fetchLoading(fetchLoadingType, false));
+        dispatch(fetchSuccess(fetchSuccessType, data));
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(fetchLoading(fetchLoadingType, false));
+        dispatch(fetchErrored(fetchErrorType, true));
+      });
+
+    await setTimeout(() => Promise.all(
       urls.map(url => (
         fetch(url)
           .then((response) => {
@@ -35,7 +58,7 @@ function fetchData(urls, parseDataCallback, args, fetchSuccessType, fetchLoading
           })
           .then(response => response.json())
           .then((json) => {
-            const data = parseDataCallback(...args, json);
+            const data = parseDataCallback(args, json);
             dispatch(fetchLoading(fetchLoadingType, false));
             dispatch(fetchSuccess(fetchSuccessType, data));
           })
@@ -45,7 +68,7 @@ function fetchData(urls, parseDataCallback, args, fetchSuccessType, fetchLoading
             dispatch(fetchErrored(fetchErrorType, true));
           })
       )),
-    );
+    ), 0);
   };
 }
 

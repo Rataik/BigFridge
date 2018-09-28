@@ -7,9 +7,7 @@ import {
   Route,
 } from 'react-router-dom';
 import App from './components/app/App';
-import configureStore from './store/configureStore';
-
-const store = configureStore();
+import store from './store/configureStore';
 
 render(
   <Provider store={store}>

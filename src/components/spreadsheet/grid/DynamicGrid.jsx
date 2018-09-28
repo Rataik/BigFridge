@@ -32,45 +32,39 @@ const renderCell = cell => (
   </Cell>
 );
 
-const getData = (dateTimeColumns, items) => {
-  const dateTimeKeys = dateTimeColumns.join('|').toLowerCase().split('|');
-  return items.map((item) => {
-    const newItem = {};
-
-    Object.entries(item).forEach(([key, value]) => {
-      if (dateTimeKeys.includes(key.toLowerCase())) {
-        newItem[key] = new Date(value);
-      } else {
-        newItem[key] = value;
-      }
-    });
-
-    return newItem;
-  });
-};
-
 class DynamicGrid extends Component {
   constructor(props) {
     super(props);
 
     this.onTableFilteredChange = this.onTableFilteredChange.bind(this);
+    this.getFilteredItems = this.getFilteredItems.bind(this);
 
+    this.isTableFiltered = false;
     this.reactTableRef = React.createRef();
 
-    const { listAssociatedProperties, section } = this.props;
+    const { section } = this.props;
     this.section = section;
     const { columns } = section.table;
     this.dateTimeColumns = columns.filter(column => column.isDateTime).map(column => column.id);
 
     this.state = {
       filtered: [],
-      items: listAssociatedProperties.foodItems.length,
     };
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    const { filtered } = this.state;
+    const { section, dynamicGridData } = this.props;
+    return section.index !== nextProps.section.index
+      || dynamicGridData.foodItems.length !== nextProps.dynamicGridData.foodItems.length
+      || dynamicGridData.isLoading !== nextProps.dynamicGridData.isLoading
+      || filtered !== nextState.filtered;
+  }
+
   componentDidUpdate(prevProps) {
-    const { section, listAssociatedProperties } = this.props;
-    if (listAssociatedProperties.foodItems.length !== prevProps.listAssociatedProperties.foodItems.length) {
+    const { section } = this.props;
+    if (section !== prevProps.section) {
+      this.isTableFiltered = false;
       this.section = section;
       const { columns } = section.table;
       this.dateTimeColumns = columns.filter(column => column.isDateTime).map(column => column.id);
@@ -79,46 +73,47 @@ class DynamicGrid extends Component {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
         filtered: [],
-        items: listAssociatedProperties.foodItems.length,
       });
     }
   }
 
   onTableFilteredChange(filtered) {
+    this.isTableFiltered = true;
     this.setState({ filtered });
+  }
 
-    const { current } = this.reactTableRef;
-    if (current) {
-      const allData = current.getResolvedState().sortedData;
-      const { items } = this.state;
-      if (items !== allData.length) {
-        this.setState({ items: allData.length });
+  getFilteredItems() {
+    if (this.isTableFiltered) {
+      const { current } = this.reactTableRef;
+      if (current) {
+        return current.getResolvedState().sortedData.length;
       }
     }
+
+    const { dynamicGridData } = this.props;
+    return dynamicGridData.foodItems.length;
   }
 
   render() {
-    const { filtered, items } = this.state;
+    const { filtered } = this.state;
     const {
-      containerHeight, headerHeight, listAssociatedProperties, renderLoadingComponent, renderNoDataComponent, section, sendTableProps, sendTheadFilterThProps, sendTrProps,
+      containerHeight, headerHeight, dynamicGridData, renderLoadingComponent, renderNoDataComponent, section, sendTableProps, sendTheadFilterThProps, sendTrProps,
     } = this.props;
-
-    const data = getData(this.dateTimeColumns, listAssociatedProperties.foodItems);
 
     const { columns, ...tableProps } = section.table;
     const gridColumns = columns.map(column => ({ ...column, Cell: (cell => (this.dateTimeColumns.includes(cell.column.id) ? renderDateTimeCell(cell) : renderCell(cell))) }));
 
     return (
       <React.Fragment>
-        <Header height={headerHeight} items={items} />
+        <Header height={headerHeight} items={this.getFilteredItems()} />
         <ReactTable
           columns={gridColumns}
-          data={data}
+          data={dynamicGridData.foodItems}
           filtered={filtered}
-          loading={listAssociatedProperties.isLoading}
+          loading={dynamicGridData.isLoading}
           ref={this.reactTableRef}
-          LoadingComponent={() => listAssociatedProperties.isLoading && renderLoadingComponent()}
-          NoDataComponent={() => !listAssociatedProperties.isLoading && renderNoDataComponent(this.section.svg.icon)}
+          LoadingComponent={() => dynamicGridData.isLoading && renderLoadingComponent()}
+          NoDataComponent={() => !dynamicGridData.isLoading && renderNoDataComponent(this.section.svg.icon)}
           onFilteredChange={filter => this.onTableFilteredChange(filter)}
           getTableProps={() => sendTableProps(containerHeight)}
           getTheadFilterThProps={sendTheadFilterThProps}
@@ -130,6 +125,6 @@ class DynamicGrid extends Component {
   }
 }
 
-const mapStateToProps = state => ({ listAssociatedProperties: { ...state.bigFridge.listAssociatedProperties } });
+const mapStateToProps = (state, ownProps) => ({ dynamicGridData: state.bigFridge[ownProps.section.reducerName] });
 
 export default withRouter(connect(mapStateToProps, null)(DynamicGrid));
