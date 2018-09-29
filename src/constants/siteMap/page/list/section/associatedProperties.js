@@ -1,5 +1,4 @@
 import matchSorter from 'match-sorter';
-import ReactTableFilters from 'react-table-filters';
 import { EndpointPlaceholder } from '../../../../constants';
 import { renderInputFilter } from '../../../../../utility/tools';
 import {
