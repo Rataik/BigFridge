@@ -68,6 +68,14 @@ export const Section = {
       Filter: renderDateFilter,
       isDateTime: true,
     }, {
+      id: 'expired',
+      Header: 'Expired',
+      accessor: row => row.Expired,
+      filterMethod: (filter, rows) => matchSorter(rows, filter.value, { keys: ['expired'] }),
+      filterAll: true,
+      Filter: renderInputFilter,
+      isDateTime: false,
+    }, {
       id: 'quantity',
       Header: 'Quantity',
       accessor: row => row.Quantity,
