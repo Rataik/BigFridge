@@ -4,7 +4,9 @@ import { withRouter } from 'react-router-dom';
 import ReactTable from 'react-table';
 import styled from 'styled-components';
 import 'react-table/react-table.css';
-import Header from './shared/Header/Header';
+import Header from './shared/header/Header';
+import * as svgIcons from '../../svgIcons';
+import { CellIconHolder } from './gridStyled';
 
 const Cell = styled.div`  
   align-items: center;   
@@ -19,17 +21,25 @@ const CellText = styled.div`
   margin-left: 10px;  
 `;
 
-const renderDateTimeCell = cell => (
-  <Cell>
-    <CellText>{new Date(cell.value).toLocaleString()}</CellText>
-  </Cell>
-);
+const renderCell = (cell) => {
+  let text = null;
+  if (cell.column.renderText) {
+    text = <CellText>{cell.column.isDateTime ? new Date(cell.value).toLocaleString() : cell.value}</CellText>;
+  }
 
-const renderCell = cell => (
-  <Cell>
-    <CellText>{cell.value}</CellText>
-  </Cell>
-);
+  let icon = null;
+  if (cell.column.svgIcon) {
+    const SvgIcon = svgIcons[cell.column.svgIcon[cell.value]];
+    icon = <CellIconHolder center={!text}><SvgIcon /></CellIconHolder>;
+  }
+
+  return (
+    <Cell>
+      {icon}
+      {text}
+    </Cell>
+  );
+};
 
 class DynamicGrid extends Component {
   constructor(props) {
@@ -43,8 +53,6 @@ class DynamicGrid extends Component {
 
     const { section } = this.props;
     this.section = section;
-    const { columns } = section.table;
-    this.dateTimeColumns = columns.filter(column => column.isDateTime).map(column => column.id);
 
     this.state = {
       filtered: [],
@@ -65,8 +73,6 @@ class DynamicGrid extends Component {
     if (section !== prevProps.section) {
       this.isTableFiltered = false;
       this.section = section;
-      const { columns } = section.table;
-      this.dateTimeColumns = columns.filter(column => column.isDateTime).map(column => column.id);
 
       // since this is a conditional check it is okay
       // eslint-disable-next-line react/no-did-update-set-state
@@ -100,7 +106,7 @@ class DynamicGrid extends Component {
     } = this.props;
 
     const { columns, ...tableProps } = section.table;
-    const gridColumns = columns.map(column => ({ ...column, Cell: (cell => (this.dateTimeColumns.includes(cell.column.id) ? renderDateTimeCell(cell) : renderCell(cell))) }));
+    const gridColumns = columns.map(column => ({ ...column, Cell: renderCell }));
 
     return (
       <React.Fragment>

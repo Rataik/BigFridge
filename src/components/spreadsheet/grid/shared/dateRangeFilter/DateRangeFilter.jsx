@@ -53,7 +53,7 @@ class DateRangeFilter extends React.Component {
           formatDate={formatDate}
           onDayChange={this.handleFromChange}
           parseDate={parseDate}
-          placeholder="Fr: mm/dd/yyyy"
+          placeholder="mm/dd/yyyy"
           value={from}
           dayPickerProps={{
             selectedDays: [from, { from, to }],
@@ -68,7 +68,7 @@ class DateRangeFilter extends React.Component {
           formatDate={formatDate}
           parseDate={parseDate}
           onDayChange={this.handleToChange}
-          placeholder="To: mm/dd/yyyy"
+          placeholder="mm/dd/yyyy"
           value={to}
           dayPickerProps={{
             selectedDays: [from, { from, to }],

@@ -2,10 +2,10 @@ import React from 'react';
 import StaticGrid from './StaticGrid';
 import DynamicGrid from './DynamicGrid';
 import './grid.css';
-import NoData from './shared/NoData/NoData';
-import Loading from './shared/Loading/Loading';
+import NoData from './shared/noData/NoData';
+import Loading from './shared/loading/Loading';
 
-const HeaderHeight = 24;
+const HeaderHeight = 27;
 const FooterHeight = 0;
 
 const sendTableProps = height => ({ style: { height: `${height}px` } });

@@ -20,7 +20,8 @@
     border: none;
 }
 
-#bf_spreadsheet  .ReactTable .rt-thead.-filters input {
+#bf_spreadsheet  .ReactTable .rt-thead.-filters input,
+#bf_spreadsheet  .ReactTable .rt-thead.-filters select {
     background-color: #ffffff;
     border-radius: unset;
     border: 1px solid rgba(127, 127, 127, .7);
@@ -64,7 +65,7 @@
 #bf_spreadsheet .ReactTable .pagination-bottom {
     color: #000000;
     position: absolute;
-    top: -24px; /* todo: note this this needs to be in sync with the header height. */
+    top: -27px; /* todo: note this this needs to be in sync with the header height. */
     right: 0;
 }
 
@@ -141,11 +142,6 @@
 
 #bf_spreadsheet .ReactTable .-pagination select {
     padding: 3px 7px;
-}
-
-
-#bf_spreadsheet .ReactTable .-pagination select {
-
 }
 
 #bf_spreadsheet .ReactTable .-pagination .-pageSizeOptions {

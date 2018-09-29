@@ -5,7 +5,8 @@ import ReactTable from 'react-table';
 import styled from 'styled-components';
 import 'react-table/react-table.css';
 import { SectionIcon } from '../../svgIcons/SectionIcon';
-import Header from './shared/Header/Header';
+import Header from './shared/header/Header';
+import { CellIconHolder } from './gridStyled';
 
 const CellLink = styled(Link)`  
   display: flex;  
@@ -17,12 +18,6 @@ const Cell = styled.div`
   display: flex;
   font-size: 13px;
   font-weight: 600;  
-`;
-
-const CellIconHolder = styled.div`  
-  display: inline-block;  
-  height: 21px;     
-  width: 21px;
 `;
 
 const CellText = styled.div`  

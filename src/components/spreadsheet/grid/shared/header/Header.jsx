@@ -9,7 +9,7 @@ const ItemsContent = styled.div`
   flex: 0 0 auto;
   font-size: 12px;
   font-weight: 400;  
-  margin-top: 5px;
+  margin: 5px 0 2px 0;
   padding-right: 20px;
 `;
 

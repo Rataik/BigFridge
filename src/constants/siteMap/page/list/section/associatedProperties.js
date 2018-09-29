@@ -1,14 +1,16 @@
 import matchSorter from 'match-sorter';
+import ReactTableFilters from 'react-table-filters';
 import { EndpointPlaceholder } from '../../../../constants';
 import { renderInputFilter } from '../../../../../utility/tools';
 import {
   filterDates,
   renderDateFilter,
-} from '../../../../../components/spreadsheet/grid/shared/DateRangeFilter/DateRangeFilter';
+} from '../../../../../components/spreadsheet/grid/shared/dateRangeFilter/DateRangeFilter';
 import {
   filterDataInRange,
   renderNumberRangeSliderFilter,
 } from '../../../../../components/spreadsheet/grid/shared/numberRangeSliderFilter/NumberRangeSliderFilter';
+import { renderSelectFilter, filterSelect } from '../../../../../components/spreadsheet/grid/shared/selectFilter/SelectFilter';
 
 export const Section = {
   order: 0,
@@ -19,7 +21,7 @@ export const Section = {
     url: {
       base: `https://raw.githubusercontent.com/Rataik/BigFridge/master/data/associatedProperties-${EndpointPlaceholder}.json`,
       // eslint-disable-next-line max-len
-      endpoints: ['0', '1'],
+      endpoints: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84', '85', '86', '87', '88', '89', '90', '91', '92', '93', '94', '95', '96', '97', '98', '99'],
     },
   },
   reducerName: 'listAssociatedProperties',
@@ -35,6 +37,7 @@ export const Section = {
       filterAll: true,
       Filter: renderInputFilter,
       isDateTime: false,
+      renderText: true,
     }, {
       id: 'type',
       Header: 'Type',
@@ -43,6 +46,7 @@ export const Section = {
       filterAll: true,
       Filter: renderInputFilter,
       isDateTime: false,
+      renderText: true,
     }, {
       id: 'store',
       Header: 'Store',
@@ -51,6 +55,7 @@ export const Section = {
       filterAll: true,
       Filter: renderInputFilter,
       isDateTime: false,
+      renderText: true,
     }, {
       id: 'PurchaseDate',
       Header: 'Purchase Date',
@@ -59,6 +64,7 @@ export const Section = {
       filterAll: false,
       Filter: renderDateFilter,
       isDateTime: true,
+      renderText: true,
     }, {
       id: 'ExpirationDate',
       Header: 'Expiration Date',
@@ -67,14 +73,20 @@ export const Section = {
       filterAll: false,
       Filter: renderDateFilter,
       isDateTime: true,
+      renderText: true,
     }, {
       id: 'expired',
       Header: 'Expired',
       accessor: row => row.Expired,
-      filterMethod: (filter, rows) => matchSorter(rows, filter.value, { keys: ['expired'] }),
-      filterAll: true,
-      Filter: renderInputFilter,
+      filterMethod: filterSelect,
+      filterAll: false,
+      Filter: renderSelectFilter,
       isDateTime: false,
+      renderText: false,
+      svgIcon: {
+        1: 'IsBadIcon',
+        0: 'IsGoodIcon',
+      },
     }, {
       id: 'quantity',
       Header: 'Quantity',
@@ -83,6 +95,7 @@ export const Section = {
       filterAll: false,
       Filter: renderNumberRangeSliderFilter,
       isDateTime: false,
+      renderText: true,
     }],
     defaultFilterMethod: (filter, rows) => {
       const { id } = filter;

@@ -22,7 +22,6 @@ function fetchSuccess(type, data) {
 }
 
 function makeFetchRequest(url, parseDataCallback, args, fetchSuccessType, fetchLoadingType, fetchErrorType, dispatch) {
-  console.log(new Date().getSeconds());
   fetch(url)
     .then((response) => {
       if (!response.ok) {
