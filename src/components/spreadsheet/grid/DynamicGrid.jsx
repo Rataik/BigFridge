@@ -110,7 +110,11 @@ class DynamicGrid extends Component {
 
     return (
       <React.Fragment>
-        <Header height={headerHeight} items={this.getFilteredItems()} />
+        <Header
+          height={headerHeight}
+          items={this.getFilteredItems()}
+          progressBar={section.fetch.progressBar && { ...section.fetch.progressBar, now: dynamicGridData.foodItems.length }}
+        />
         <ReactTable
           columns={gridColumns}
           data={dynamicGridData.foodItems}
