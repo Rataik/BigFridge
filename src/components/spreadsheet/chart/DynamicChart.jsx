@@ -1,15 +1,5 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import connect from 'react-redux/es/connect/connect';
+import React from 'react';
 
-class DynamicChart extends Component {
-  constructor(props) {
-    super(props);
-  }
+const DynamicChart = () => <div>DynamicChart</div>;
 
-  render() {
-    return <div>Dynamic Chart</div>
-  }
-}
-
-export default withRouter(connect(null, null)(DynamicChart));
+export default DynamicChart;

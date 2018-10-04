@@ -41,7 +41,7 @@ function loadData(props, state) {
         }, []);
       }
 
-      props[section.fetch.name](urls, fetchArgs);
+      props[section.fetch.name](urls, section.fetch.delay, section.index, fetchArgs);
     })
   ));
 }

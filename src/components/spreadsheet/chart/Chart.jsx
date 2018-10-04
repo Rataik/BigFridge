@@ -1,15 +1,5 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import connect from 'react-redux/es/connect/connect';
+import React from 'react';
 
-class Chart extends Component {
-  constructor(props) {
-    super(props);
-  }
+const Chart = () => <div>Chart</div>;
 
-  render() {
-    return <div>Chart</div>;
-  }
-}
-
-export default withRouter(connect(null, null)(Chart));
+export default Chart;

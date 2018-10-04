@@ -1,5 +1,6 @@
 import {
   AssociatedPropertiesFetchSuccess,
+  AssociatedPropertiesFetchPause,
   AssociatedPropertiesFetchIsLoading,
   AssociatedPropertiesFetchHasErrored,
   ByPurchasedAfterExpirationBucketedByFoodFetchSuccess,
@@ -17,6 +18,7 @@ Pages.filter(page => !page.isHome).forEach(page => (
     initialState[section.reducerName] = {
       hasErrored: false,
       isLoading: false,
+      pause: false,
       foodItems: [],
     };
   })
@@ -75,6 +77,15 @@ function bigFridge(state = initialState, action) {
         listAssociatedProperties: {
           ...state.listAssociatedProperties,
           isLoading: action.isLoading,
+        },
+      };
+
+    case AssociatedPropertiesFetchPause:
+      return {
+        ...state,
+        listAssociatedProperties: {
+          ...state.listAssociatedProperties,
+          pause: action.pause,
         },
       };
 

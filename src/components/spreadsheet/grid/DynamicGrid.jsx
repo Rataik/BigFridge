@@ -7,6 +7,7 @@ import 'react-table/react-table.css';
 import Header from './shared/header/Header';
 import * as svgIcons from '../../svgIcons';
 import { CellIconHolder } from './gridStyled';
+import * as fetchActions from '../../../actions';
 
 const Cell = styled.div`  
   align-items: center;   
@@ -45,6 +46,7 @@ class DynamicGrid extends Component {
   constructor(props) {
     super(props);
 
+    this.onPauseResumeClick = this.onPauseResumeClick.bind(this);
     this.onTableFilteredChange = this.onTableFilteredChange.bind(this);
     this.getFilteredItems = this.getFilteredItems.bind(this);
 
@@ -65,6 +67,7 @@ class DynamicGrid extends Component {
     return section.index !== nextProps.section.index
       || dynamicGridData.foodItems.length !== nextProps.dynamicGridData.foodItems.length
       || dynamicGridData.isLoading !== nextProps.dynamicGridData.isLoading
+      || dynamicGridData.pause !== nextProps.dynamicGridData.pause
       || filtered !== nextState.filtered;
   }
 
@@ -79,6 +82,17 @@ class DynamicGrid extends Component {
       this.setState({
         filtered: [],
       });
+    }
+  }
+
+  onPauseResumeClick() {
+    const { dynamicGridData, section } = this.props;
+    if (dynamicGridData.pause) {
+    // eslint-disable-next-line react/destructuring-assignment
+      this.props[section.fetch.pauseName](false, section.index);
+    } else {
+    // eslint-disable-next-line react/destructuring-assignment
+      this.props[section.fetch.pauseName](true, section.index);
     }
   }
 
@@ -113,7 +127,9 @@ class DynamicGrid extends Component {
         <Header
           height={headerHeight}
           items={this.getFilteredItems()}
+          onClick={this.onPauseResumeClick}
           progressBar={section.fetch.progressBar && { ...section.fetch.progressBar, now: dynamicGridData.foodItems.length }}
+          pause={dynamicGridData.pause}
         />
         <ReactTable
           columns={gridColumns}
@@ -136,4 +152,4 @@ class DynamicGrid extends Component {
 
 const mapStateToProps = (state, ownProps) => ({ dynamicGridData: state.bigFridge[ownProps.section.reducerName] });
 
-export default withRouter(connect(mapStateToProps, null)(DynamicGrid));
+export default withRouter(connect(mapStateToProps, fetchActions)(DynamicGrid));

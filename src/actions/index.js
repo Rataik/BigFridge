@@ -1,7 +1,8 @@
-import fetchData from './utilityActions';
+import fetchData, { pauseFetchRequest } from './utilityActions';
 import {
   AssociatedPropertiesFetchSuccess,
   AssociatedPropertiesFetchIsLoading,
+  AssociatedPropertiesFetchPause,
   AssociatedPropertiesFetchHasErrored,
   ByPurchasedAfterExpirationBucketedByFoodFetchSuccess,
   ByPurchasedAfterExpirationBucketedByFoodFetchIsLoading,
@@ -12,29 +13,37 @@ import {
 } from '../constants/actionTypes';
 import parseFoodData from './foodActions';
 
-export const fetchByMonthPurchasedBucketedByFoodData = (urls, args) => fetchData(
+export const fetchByMonthPurchasedBucketedByFoodData = (urls, fetchDelay, sectionIndex, parseFoodDataArgs) => fetchData(
   urls,
+  fetchDelay,
+  sectionIndex,
   parseFoodData,
-  args,
+  parseFoodDataArgs,
   ByMonthPurchasedBucketedByFoodFetchSuccess,
   ByMonthPurchasedBucketedByFoodFetchIsLoading,
   ByMonthPurchasedBucketedByFoodFetchHasErrored,
 );
 
-export const fetchByPurchasedAfterExpirationBucketedByFoodData = (urls, args) => fetchData(
+export const fetchByPurchasedAfterExpirationBucketedByFoodData = (urls, fetchDelay, sectionIndex, parseFoodDataArgs) => fetchData(
   urls,
+  fetchDelay,
+  sectionIndex,
   parseFoodData,
-  args,
+  parseFoodDataArgs,
   ByPurchasedAfterExpirationBucketedByFoodFetchSuccess,
   ByPurchasedAfterExpirationBucketedByFoodFetchIsLoading,
   ByPurchasedAfterExpirationBucketedByFoodFetchHasErrored,
 );
 
-export const fetchAssociatedPropertiesData = (urls, args) => fetchData(
+export const fetchAssociatedPropertiesData = (urls, fetchDelay, sectionIndex, parseFoodDataArgs) => fetchData(
   urls,
+  fetchDelay,
+  sectionIndex,
   parseFoodData,
-  args,
+  parseFoodDataArgs,
   AssociatedPropertiesFetchSuccess,
   AssociatedPropertiesFetchIsLoading,
   AssociatedPropertiesFetchHasErrored,
 );
+
+export const pauseFetchAssociatedPropertiesData = (pause, sectionIndex) => pauseFetchRequest(AssociatedPropertiesFetchPause, sectionIndex, pause);

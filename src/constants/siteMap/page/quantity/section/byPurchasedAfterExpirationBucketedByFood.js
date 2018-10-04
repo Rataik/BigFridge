@@ -10,6 +10,7 @@ export const Section = {
       base: `https://raw.githubusercontent.com/Rataik/BigFridge/master/data/${EndpointPlaceholder}.json`,
       endpoints: ['purchasedAfterExpirationBucketedByFood'],
     },
+    delay: 1000,
   },
   display: 'chart',
   reducerName: 'quantityByPurchasedAfterExpirationBucketedByFood',

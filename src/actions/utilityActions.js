@@ -1,4 +1,32 @@
-import { FetchDelay } from '../constants/constants';
+import Pages from '../constants/siteMap/SiteMap';
+
+const PauseSection = [];
+Pages.filter(page => !page.isHome).forEach(page => (
+  page.sections.forEach((section) => {
+    PauseSection[section.index] = false;
+  })
+));
+
+function waitFor(ms, data) {
+  return new Promise((resolve) => {
+    setTimeout(resolve.bind(null, data), ms);
+  });
+}
+
+async function fetchDataWhileNotPaused(array, delay, sectionIndex, callback) {
+  // We want to wait on each item in the sequence
+  // eslint-disable-next-line no-restricted-syntax
+  for (const item of array) {
+    // We want the requests to be sync in order to implement pause/resume
+    // eslint-disable-next-line no-await-in-loop
+    await callback(item).then(data => waitFor(delay, data));
+
+    while (PauseSection[sectionIndex]) {
+      // eslint-disable-next-line no-await-in-loop
+      await waitFor(delay, null);
+    }
+  }
+}
 
 function fetchErrored(type, hasErrored) {
   return {
@@ -21,8 +49,27 @@ function fetchSuccess(type, data) {
   };
 }
 
+function fetchPause(type, pause) {
+  return {
+    type,
+    pause,
+  };
+}
+
+function pauseFetchRequest(pauseType, sectionIndex, pause) {
+  return (dispatch) => {
+    if (pause) {
+      PauseSection[sectionIndex] = true;
+      dispatch(fetchPause(pauseType, true));
+    } else {
+      PauseSection[sectionIndex] = false;
+      dispatch(fetchPause(pauseType, false));
+    }
+  };
+}
+
 function makeFetchRequest(url, parseDataCallback, args, fetchSuccessType, fetchLoadingType, fetchErrorType, dispatch) {
-  fetch(url)
+  return fetch(url)
     .then((response) => {
       if (!response.ok) {
         throw new Error(response.statusText);
@@ -43,18 +90,18 @@ function makeFetchRequest(url, parseDataCallback, args, fetchSuccessType, fetchL
     });
 }
 
-function fetchData(urls, parseDataCallback, args, fetchSuccessType, fetchLoadingType, fetchErrorType) {
-  return (dispatch) => {
+function fetchData(urls, fetchDelay, sectionIndex, parseDataCallback, parseDataCallbackArgs, fetchSuccessType, fetchLoadingType, fetchErrorType) {
+  return async (dispatch) => {
     dispatch(fetchLoading(fetchLoadingType, true));
 
-    // Optimization: looks like if you fire all requests async the isLoading is false, but fetchSuccess hasn't been dispatched yet.
-    let delay = 0;
-    urls.forEach((url) => {
-      setTimeout(() => makeFetchRequest(url, parseDataCallback, args, fetchSuccessType, fetchLoadingType, fetchErrorType, dispatch),
-        delay + FetchDelay);
-      delay += FetchDelay;
-    });
+    await fetchDataWhileNotPaused(
+      urls,
+      fetchDelay,
+      sectionIndex,
+      url => makeFetchRequest(url, parseDataCallback, parseDataCallbackArgs, fetchSuccessType, fetchLoadingType, fetchErrorType, dispatch),
+    );
   };
 }
 
+export { pauseFetchRequest };
 export default fetchData;

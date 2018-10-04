@@ -1,11 +1,14 @@
 export const AssociatedPropertiesFetchIsLoading = 'AssociatedPropertiesFetchIsLoading';
+export const AssociatedPropertiesFetchPause = 'AssociatedPropertiesFetchPause';
 export const AssociatedPropertiesFetchHasErrored = 'AssociatedPropertiesFetchHasErrored';
 export const AssociatedPropertiesFetchSuccess = 'AssociatedPropertiesFetchSuccess';
 
 export const ByPurchasedAfterExpirationBucketedByFoodFetchIsLoading = 'ByPurchasedAfterExpirationBucketedByFoodFetchIsLoading';
+export const ByPurchasedAfterExpirationBucketedByFoodFetchPause = 'ByPurchasedAfterExpirationBucketedByFoodFetchPause';
 export const ByPurchasedAfterExpirationBucketedByFoodFetchHasErrored = 'ByPurchasedAfterExpirationBucketedByFoodFetchHasErrored';
 export const ByPurchasedAfterExpirationBucketedByFoodFetchSuccess = 'ByPurchasedAfterExpirationBucketedByFoodFetchSuccess';
 
 export const ByMonthPurchasedBucketedByFoodFetchIsLoading = 'ByMonthPurchasedBucketedByFoodFetchIsLoading';
+export const ByMonthPurchasedBucketedByFoodFetchPause = 'ByMonthPurchasedBucketedByFoodFetchPause';
 export const ByMonthPurchasedBucketedByFoodFetchHasErrored = 'ByMonthPurchasedBucketedByFoodFetchHasErrored';
 export const ByMonthPurchasedBucketedByFoodFetchSuccess = 'ByMonthPurchasedBucketedByFoodFetchSuccess';

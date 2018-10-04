@@ -6,3 +6,5 @@ export * from './SectionIcon';
 export * from './StayHealthyIcon';
 export * from './IsBadIcon';
 export * from './IsGoodIcon';
+export * from './StartIcon';
+export * from './PauseIcon';
